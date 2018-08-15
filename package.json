@@ -1,0 +1,19 @@
+{
+  "name": "photosharing",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nerorodrigues/photosharing.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/nerorodrigues/photosharing/issues"
+  },
+  "homepage": "https://github.com/nerorodrigues/photosharing#readme"
+}
