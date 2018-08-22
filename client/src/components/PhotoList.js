@@ -19,7 +19,7 @@ PhotoListInner.propTypes = {
     error: PropTypes.instanceOf(Error), // eslint-disable-line react/require-default-props
     data: PropTypes.shape({
         photos: PropTypes.arrayOf(PropTypes.shape({
-            id: PropTypes.oneOfType([PropTypes.number, PropTypes.string]).isRequired,
+            id: PropTypes.string.isRequired,
             width: PropTypes.number,
             height: PropTypes.number,
         })),
@@ -30,4 +30,6 @@ PhotoListInner.defaultProps = {
     data: {},
 };
 
-export const PhotoList = () => <AllPhotos>{PhotoListInner}</AllPhotos>;
+const PhotoList = () => <AllPhotos>{PhotoListInner}</AllPhotos>;
+
+export default PhotoList;

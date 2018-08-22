@@ -1,8 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { gql } from 'apollo-boost';
 import { Query } from 'react-apollo';
-
+import gql from 'graphql-tag';
 export const GET_ALL_PHOTOS = gql`
     query getAllPhotos {
         photos {

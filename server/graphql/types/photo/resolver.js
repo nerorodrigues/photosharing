@@ -1,3 +1,14 @@
+const fs = require('fs');
+const { PubSub, withFilter } = require('graphql-subscriptions');
+
+const convertToBase64 = async (stream) => {
+    return await stream.read().toString('Base64');
+};
+
+const PHOTO_ADDED = 'PHOTO_ADDED';
+
+const pubSub = new PubSub();
+
 /* eslint-disable no-underscore-dangle */
 module.exports = {
     resolver: {
@@ -37,7 +48,7 @@ module.exports = {
             photo: (root, { id }, { db, user }) =>
                 db.photos.findOne({
                     $and: [
-                        { _id: parseInt(id, 10) },
+                        { _id: id },
                         user
                             ? {
                                 $or: {
@@ -50,8 +61,20 @@ module.exports = {
                 }),
         },
         Mutation: {
-            uploadPhoto: async (root, args, { user }) => {
-                // TODO: handle uploadPhoto
+            uploadPhoto: async (root, args, { user, db }) => {
+
+                const { stream, filename, mimetype, encoding } = await args.image;
+
+                var data = await db.photos.insert({
+                    ownerId: 1,
+                    image: await convertToBase64(stream),
+                    private: !!args.private,
+                    caption: args.caption,
+                    width: 800,
+                    height: 600,
+                });
+                pubSub.publish(PHOTO_ADDED, { photoAdded: data });
+                return null;
             },
             editPhoto: async (root, args, { user }) => {
                 // TODO: handle editPhoto
@@ -62,13 +85,14 @@ module.exports = {
         },
         Subscription: {
             photoAdded: async (root, args, ctx) => {
-                // TODO: handle photoAdded Subscription
+                console.log("Subscription");
+                subscribe: () => pubSub.asyncIterator([PHOTO_ADDED]);
             },
             photoEdited: async (root, args, ctx) => {
-                // TODO: handle photoEdited Subscription
+                console.log(2);
             },
             photoDeleted: async (root, args, ctx) => {
-                // TODO: handle photoDeleted Subscription
+                console.log(3);
             },
         },
     },

@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { gql } from 'apollo-boost';
+import gql from 'graphql-tag';
 import { Query } from 'react-apollo';
 
 export const GET_PHOTO = gql`
@@ -22,7 +22,7 @@ export const GET_PHOTO = gql`
 const PhotoData = ({ id, ...props }) => <Query query={GET_PHOTO} variables={{ id }} {...props} />;
 
 PhotoData.propTypes = {
-    id: PropTypes.oneOfType([PropTypes.number, PropTypes.string]).isRequired,
+    id: PropTypes.string.isRequired,
     children: PropTypes.func.isRequired,
 };
 

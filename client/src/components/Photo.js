@@ -48,11 +48,11 @@ PhotoPreview.propTypes = {
     error: PropTypes.instanceOf(Error), // eslint-disable-line react/require-default-props
     data: PropTypes.shape({
         photo: PropTypes.shape({
-            id: PropTypes.oneOfType([PropTypes.number, PropTypes.string]).isRequired,
+            id: PropTypes.string.isRequired,
             width: PropTypes.number,
             height: PropTypes.number,
             owner: PropTypes.shape({
-                id: PropTypes.oneOfType([PropTypes.number, PropTypes.string]).isRequired,
+                id: PropTypes.string.isRequired,
                 name: PropTypes.string.isRequired,
             }),
             caption: PropTypes.string,

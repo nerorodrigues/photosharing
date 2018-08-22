@@ -51,7 +51,7 @@ const testPhotos = async () =>
     ].map(async ({
         id, animal, width, height, isPrivate, ...image
     }) => ({
-        _id: id,
+        //_id: id,
         ...image,
         width,
         height,

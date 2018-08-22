@@ -16,13 +16,13 @@ type Query {
 }
 
 type Mutation {
-    uploadPhoto(image: Upload!, caption: String, private: Boolean): Photo @loggedIn
+    uploadPhoto(image: Upload!, caption: String, private: Boolean): Photo
     editPhoto(id: ID!, caption: String, private: Boolean): Photo @loggedIn
     deletePhoto(id: ID!): Boolean @loggedIn
 }
 
 type Subscription {
-    photoAdded: Photo
+    photoAdded(id: ID): Photo
     photoEdited: Photo
     photoDeleted: Photo
 }
