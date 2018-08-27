@@ -3,7 +3,7 @@ type Photo {
     ownerId: ID!
     private: Boolean!
     caption: String
-    owner: User!
+    owner: User
     width: Int!
     height: Int!
     image: String!
@@ -16,7 +16,7 @@ type Query {
 }
 
 type Mutation {
-    uploadPhoto(image: Upload!, caption: String, private: Boolean): Photo
+    uploadPhoto(image: Upload!, caption: String, private: Boolean): Photo @loggedIn
     editPhoto(id: ID!, caption: String, private: Boolean): Photo @loggedIn
     deletePhoto(id: ID!): Boolean @loggedIn
 }

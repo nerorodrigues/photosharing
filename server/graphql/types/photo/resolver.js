@@ -1,4 +1,3 @@
-const fs = require('fs');
 const { PubSub, withFilter } = require('graphql-subscriptions');
 
 const convertToBase64 = async (stream) => {
@@ -73,8 +72,24 @@ module.exports = {
                     width: 800,
                     height: 600,
                 });
-                pubSub.publish(PHOTO_ADDED, { photoAdded: data });
-                return null;
+                var photo = {
+                    'Photo.id': data._id,
+                    'Photo.ownerId': 1,
+                    'Photo.private': data.private,
+                    'Photo.caption': '',
+                    'Photo.owner': null,
+                    'Photo.width': 800,
+                    'Photo.height': 600,
+                    'Photo.image': data.image,
+                    'Photo.createdAt': new Date()
+                };
+
+                pubSub.publish(PHOTO_ADDED, {
+                    payload: {
+                        photoAdded: photo
+                    }
+                });
+                return photo;
             },
             editPhoto: async (root, args, { user }) => {
                 // TODO: handle editPhoto
@@ -84,9 +99,8 @@ module.exports = {
             },
         },
         Subscription: {
-            photoAdded: async (root, args, ctx) => {
-                console.log("Subscription");
-                subscribe: () => pubSub.asyncIterator([PHOTO_ADDED]);
+            photoAdded: {
+                subscribe: async (root, args, ctx) => await pubSub.asyncIterator([PHOTO_ADDED])
             },
             photoEdited: async (root, args, ctx) => {
                 console.log(2);

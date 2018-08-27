@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import propTypes from 'prop-types';
-import { Upload, UploadSubscription } from '../containers/upload';
+import Upload from '../containers/upload';
 
 
 class UploadInner extends Component {
@@ -8,9 +8,12 @@ class UploadInner extends Component {
         super(props);
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
+        this.handleInputChange = this.handleInputChange.bind(this);
         this.state = {
             file: null,
-            imagePreview: null
+            imagePreview: null,
+            privatePhoto: false,
+            caption: ''
         }
     }
 
@@ -28,10 +31,19 @@ class UploadInner extends Component {
             fr.readAsDataURL(file)
         }
     }
+    handleInputChange(event) {
+        const target = event.target;
+        const value = target.type === 'checkbox' ? target.checked : target.value;
+        const name = target.name;
+
+        this.setState({
+            [name]: value
+        });
+    }
 
 
     handleSubmit() {
-        this.props.mutation({ variables: { image: this.state.file, caption: 'Nero', private: false } });
+        this.props.mutation({ variables: { image: this.state.file, caption: this.state.caption, private: this.state.privatePhoto } });
     }
 
     render() {
@@ -46,12 +58,13 @@ class UploadInner extends Component {
         if (this.props.error) return <div>Error :(</div>;
         return (
             <div>
-                <input type="file" required onChange={this.handleChange} />
-                <input type="checkbox" />
+                <input name="file" type="file" required onChange={this.handleChange} />
+                <input name="caption" type="text" value={this.state.caption} onChange={this.handleInputChange} />
+                <input name="privatePhoto" type="checkbox" value={this.state.privatePhoto} onChange={this.handleInputChange} />
                 <input type="submit" value="Submit" onClick={this.handleSubmit} disabled={!this.state.valid} />
-                <div className="imgPreview">
+                {/* <div className="imgPreview">
                     {$imagePreview}
-                </div>
+                </div> */}
             </div>)
     }
 }
@@ -67,14 +80,6 @@ UploadInner.defaultProps = {
     privatePhoto: true,
 };
 
-export const renderUpload = (uploadPhoto, { loading, error }) => {
-    return (
-        <UploadInner mutation={uploadPhoto} loading={loading} error={error}>
-        </UploadInner>)
-};
+export default () => <Upload>{(mutation, { loading, error }) => <UploadInner mutation={mutation} error={error} loading={loading} />}</Upload>;
 
-const UploadPhotoMutation = () => <Upload>{renderUpload}</Upload>;
-
-const UploadPhoto = () => <UploadSubscription>{UploadPhotoMutation}</UploadSubscription>;
-
-export default UploadPhoto;
+//const UploadPhoto = () => <UploadSubscription>{UploadPhotoMutation}</UploadSubscription>;

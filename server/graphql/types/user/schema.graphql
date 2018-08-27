@@ -1,7 +1,7 @@
 type User {
     id: ID!
     name: String!
-    photos: [Photo!]!
+    photos: [Photo]
 }
 
 type Query {

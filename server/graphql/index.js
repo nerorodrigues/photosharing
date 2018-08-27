@@ -12,16 +12,16 @@ const createSchema = async () => {
     });
 };
 
-const createSubscritionServer = async (ws) => {
-    return new SubscriptionServer({
+const createSubscritionServer = async (ws, schema) => {
+    new SubscriptionServer({
         execute,
         subscribe,
-        schema: createSchema()
+        schema
     }, {
             server: ws,
-            path: '/subscriptions'
+            path: '/subscriptions',
         });
-}
+};
 
 module.exports = { createSchema, createSubscritionServer };
 

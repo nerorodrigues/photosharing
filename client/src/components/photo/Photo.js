@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import PhotoData from '../containers/photo';
+import PhotoData from '../../containers/photo';
 import './Photo.css';
 
 const BASE_WIDTH = 600;
@@ -11,7 +11,7 @@ export const PhotoPreview = ({
     if (loading) {
         return (
             <div className="PhotoPreview loading">
-                <div className="PhotoPreview-image" style={{ width, height: (height / width) * BASE_WIDTH }}>
+                <div className="PhotoPreview-image" style={{ width: 600, height: 800 }}>
                     &nbsp;
                 </div>
                 <div className="PhotoPreview-metadata">Loading...</div>
