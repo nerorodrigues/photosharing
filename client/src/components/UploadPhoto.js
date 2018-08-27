@@ -58,14 +58,24 @@ class UploadInner extends Component {
         if (this.props.error) return <div>Error :(</div>;
         return (
             <div>
-                <input name="file" type="file" required onChange={this.handleChange} />
-                <input name="caption" type="text" value={this.state.caption} onChange={this.handleInputChange} />
-                <input name="privatePhoto" type="checkbox" value={this.state.privatePhoto} onChange={this.handleInputChange} />
-                <input type="submit" value="Submit" onClick={this.handleSubmit} disabled={!this.state.valid} />
-                {/* <div className="imgPreview">
+                <div>
+                    <input name="file" type="file" required onChange={this.handleChange} />
+                </div>
+                <div>
+                    <label for="caption">Caption:</label>
+                    <input name="caption" type="text" value={this.state.caption} onChange={this.handleInputChange} />
+                </div>
+                <div>
+                    <input name="privatePhoto" type="checkbox" value={this.state.privatePhoto} onChange={this.handleInputChange} />
+                    <label for="privatePhoto">Private?</label>
+                </div>
+                <div>
+                    <input type="submit" value="Submit" onClick={this.handleSubmit} disabled={!this.state.valid} />
+                </div>
+                <div className="imgPreview">
                     {$imagePreview}
-                </div> */}
-            </div>)
+                </div>
+            </div >)
     }
 }
 

@@ -1,0 +1,16 @@
+.Register{
+    margin: 10px;
+    border: 2px;
+    border-bottom-style: outset;
+    border-color: beige;
+}
+
+.Register div{
+    padding: 3px;
+}
+.Register div input{
+    margin: 2px;
+}
+.Register div button{
+    margin: 2px;
+}

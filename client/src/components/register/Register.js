@@ -37,14 +37,18 @@ class RegisterInner extends Component {
     render() {
         if (this.props.loading) return <div>Loading...</div>;
         if (this.props.error) return <div>Error :(</div>;
-        return (<div>
+        return (<div className="Register">
             <div>
+                <label>Username:</label>
                 <input name="userName" type="text" placeholder="User Name" value={this.state.userName} onChange={this.inputChangeHandle} />
             </div>
             <div>
+                <label>Password:</label>
                 <input name="password" type="password" placeholder="Password" value={this.state.password} onChange={this.inputChangeHandle} />
             </div>
-            <button onClick={this.enviarHandle}>Enviar</button>
+            <div>
+                <button onClick={this.enviarHandle}>Enviar</button>
+            </div>
         </div>)
     }
 }
