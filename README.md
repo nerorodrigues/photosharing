@@ -1,10 +1,8 @@
-# Mudano Engineering Assessment
-
 ## Photo Sharing System
 
 ### Context
 
-People at Mudano often do interesting things in their spare time or when they go on holiday. When they return they like to share photos of their adventures. We would like you to develop a basic single page application to allow sharing photos, along with a basic caption, that anyone in the company can use to view and add photos.
+People often do interesting things in their spare time or when they go on holiday. When they return they like to share photos of their adventures. We would like you to develop a basic single page application to allow sharing photos, along with a basic caption, that anyone in the company can use to view and add photos.
 
 ### Functional Requirements
 
